@@ -1,5 +1,3 @@
-# A simple mock SMTP server that saves all incoming emails to local file system
-
 ## What is this?
 
 This is a simple mock SMTP server that saves all the incoming emails to a folder in the local file system.
