@@ -4,7 +4,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.boot.test.SpringApplicationConfiguration
+import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.io.FileSystemResource
@@ -12,10 +12,10 @@ import org.springframework.mail.SimpleMailMessage
 import org.springframework.mail.javamail.JavaMailSenderImpl
 import org.springframework.mail.javamail.MimeMessageHelper
 import org.springframework.test.context.TestPropertySource
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
+import org.springframework.test.context.junit4.SpringRunner
 
-@RunWith(SpringJUnit4ClassRunner)
-@SpringApplicationConfiguration(classes = MySmtpApplication)
+@RunWith(SpringRunner)
+@SpringBootTest(classes = MySmtpApplication)
 @TestPropertySource(locations = "classpath:test.properties")
 @Configuration
 class MySmtpApplicationTests {
