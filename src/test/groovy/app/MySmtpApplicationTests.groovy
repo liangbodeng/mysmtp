@@ -15,7 +15,7 @@ import org.springframework.test.context.TestPropertySource
 import org.springframework.test.context.junit4.SpringRunner
 
 @RunWith(SpringRunner)
-@SpringBootTest(classes = MySmtpApplication)
+@SpringBootTest(classes = [MySmtpApplication, MySmtpApplicationTests])
 @TestPropertySource(locations = "classpath:test.properties")
 @Configuration
 class MySmtpApplicationTests {
