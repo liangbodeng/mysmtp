@@ -17,9 +17,9 @@ class MainRunner(
     @Override
     override fun run(vararg args: String) {
         File(smtpMessageDir).mkdirs()
-        SMTPServer { _ -> MyMessageHandler(smtpMessageDir) }.run {
-            port = smtpPort
-            start()
-        }
+
+        SMTPServer { MyMessageHandler(smtpMessageDir) }
+            .apply { port = smtpPort }
+            .start()
     }
 }
