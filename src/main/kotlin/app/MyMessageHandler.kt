@@ -1,34 +1,23 @@
 package app
 
-import org.subethamail.smtp.MessageHandler
+import org.subethamail.smtp.MessageContext
+import org.subethamail.smtp.helper.BasicMessageListener
 import java.io.File
-import java.io.InputStream
-
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import javax.mail.Multipart
 import javax.mail.Part
 import javax.mail.Session
 import javax.mail.internet.MimeBodyPart
 import javax.mail.internet.MimeMessage
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 class MyMessageHandler(
-        val messageDir: String
-): MessageHandler {
-    @Override
-    override fun from(from: String) {
-        println("FROM: $from")
-    }
+    val messageDir: String
+) : BasicMessageListener {
 
-    @Override
-    override fun recipient(recipient: String) {
-        println("RECIPIENT: $recipient")
-    }
-
-    @Override
-    override fun data(data: InputStream) {
+    override fun messageArrived(context: MessageContext, from: String, to: String, data: ByteArray) {
         val session = Session.getDefaultInstance(System.getProperties())
-        val mimeMessage = MimeMessage(session, data)
+        val mimeMessage = MimeMessage(session, data.inputStream())
         val prefix = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss").format(LocalDateTime.now())
         dumpPart(mimeMessage, prefix, 1, 1)
     }
@@ -60,10 +49,5 @@ class MyMessageHandler(
 
     private fun getContentType(p: Part): String {
         return p.contentType.lines()[0].replace(";", "")
-    }
-
-    @Override
-    override fun done() {
-        println("Finished")
     }
 }

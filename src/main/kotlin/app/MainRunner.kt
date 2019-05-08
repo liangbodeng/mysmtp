@@ -18,8 +18,10 @@ class MainRunner(
     override fun run(vararg args: String) {
         File(smtpMessageDir).mkdirs()
 
-        SMTPServer { MyMessageHandler(smtpMessageDir) }
-            .apply { port = smtpPort }
+        SMTPServer
+            .port(smtpPort)
+            .messageHandler(MyMessageHandler(smtpMessageDir))
+            .build()
             .start()
     }
 }

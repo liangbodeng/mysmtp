@@ -45,7 +45,7 @@ dependencies {
 
     compile("org.springframework.boot:spring-boot-starter")
 
-    compile("org.subethamail:subethasmtp:3.1.7")
+    compile("com.github.davidmoten:subethasmtp:4.0.1")
 
     testCompile("org.springframework.boot:spring-boot-starter-test")
     testCompile("org.springframework:spring-context-support")
